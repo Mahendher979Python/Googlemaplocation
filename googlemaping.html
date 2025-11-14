@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Location Card — 5PQ7+GC2 Gangapur, Telangana</title>
+  <style>
+    :root{
+      --bg: #f6f8fb;
+      --card: #ffffff;
+      --accent: #0066cc;
+      --muted: #6b7280;
+      --glass: rgba(255,255,255,0.6);
+      font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,var(--bg),#e9f0ff 60%);
+      padding:24px;
+    }
+    .card{
+      width:100%;max-width:920px;background:var(--card);border-radius:14px;box-shadow:0 8px 30px rgba(6,24,60,0.08);overflow:hidden;display:grid;grid-template-columns:1fr 420px;
+    }
+    @media (max-width:880px){.card{grid-template-columns:1fr;}}
+
+    .info{
+      padding:28px 26px;display:flex;flex-direction:column;gap:16px;
+    }
+    h1{margin:0;font-size:20px;color:#07203a}
+    p.lead{margin:0;color:var(--muted);font-size:14px}
+
+    .location-row{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+    .plus-code{
+      padding:10px 14px;background:linear-gradient(0deg,#f8fbff,#ffffff);border-radius:10px;border:1px solid #eef3ff;font-weight:600;color:#07325a;letter-spacing:0.6px;
+    }
+
+    .actions{display:flex;gap:8px;flex-wrap:wrap}
+    button, a.btn{
+      background:var(--accent);color:white;border:0;padding:10px 12px;border-radius:10px;font-weight:600;text-decoration:none;cursor:pointer;display:inline-flex;gap:8px;align-items:center;
+      box-shadow:0 6px 18px rgba(3,102,204,0.12);
+    }
+    button.ghost{background:transparent;color:var(--accent);border:1px solid rgba(3,102,204,0.12);box-shadow:none}
+    .muted-btn{background:transparent;color:var(--muted);border:1px solid #e6edf7}
+
+    .meta{display:flex;gap:12px;align-items:center;color:var(--muted);font-size:13px}
+    .meta small{opacity:0.9}
+
+    .map-wrap{
+      min-height:260px;border-left:1px solid #f1f5f9;position:relative;background:linear-gradient(180deg,#fbfdff, #f3f7ff);
+    }
+    @media (max-width:880px){.map-wrap{border-left:none;border-top:1px solid #f1f5f9}}
+    iframe{width:100%;height:100%;border:0;display:block}
+
+    .mini{
+      position:absolute;right:12px;top:12px;background:var(--glass);backdrop-filter:blur(6px);padding:6px 8px;border-radius:10px;font-size:13px;color:#07325a;border:1px solid rgba(7,50,90,0.06)
+    }
+
+    .notice{font-size:13px;color:var(--muted)}
+
+    /* small helper */
+    .copy-success{display:inline-block;margin-left:8px;padding:6px 8px;border-radius:8px;background:#ecfdf5;color:#065f46;font-weight:600;font-size:13px}
+  </style>
+</head>
+<body>
+  <div class="card" role="region" aria-label="Location card for 5PQ7+GC2 Gangapur, Telangana">
+    <div class="info">
+      <div>
+        <h1>Location — 5PQ7+GC2 Gangapur, Telangana</h1>
+        <p class="lead">This card shows the Open Location Code (plus code) and an embedded Google Maps preview. Use the buttons to copy the code or open it in Google Maps.</p>
+      </div>
+
+      <div class="location-row">
+        <div class="plus-code" id="plusCode">5PQ7+GC2 Gangapur, Telangana</div>
+
+        <div class="actions">
+          <button id="copyBtn" title="Copy plus code">📋 Copy</button>
+          <a id="mapsLink" class="btn" href="#" target="_blank" rel="noopener" title="Open in Google Maps">🗺️ Open in Maps</a>
+          <button id="shareBtn" class="ghost" title="Share link">🔗 Share</button>
+        </div>
+      </div>
+
+      <div class="meta">
+        <div><small>Type:</small> <strong style="margin-left:6px">Plus code / short address</strong></div>
+        <div><small>Region:</small> <span style="margin-left:6px">Gangapur, Telangana, India</span></div>
+      </div>
+
+      <div class="notice">Tip: If the embedded map doesn't load, click <a id="mapsLinkText" href="#" target="_blank">Open in Maps</a> to view on Google Maps directly.</div>
+
+      <div style="margin-top:auto;font-size:13px;color:var(--muted)">Generated: <strong id="generatedDate"></strong></div>
+    </div>
+
+    <div class="map-wrap">
+      <div class="mini" aria-hidden="true">Preview</div>
+      <!-- Google Maps embed using query parameter. If your environment blocks google maps, the link button still opens the map in a new tab. -->
+      <iframe id="gmap" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+  </div>
+
+  <script>
+    (function(){
+      const plus = '5PQ7+GC2 Gangapur, Telangana';
+      const plusCodeEl = document.getElementById('plusCode');
+      const copyBtn = document.getElementById('copyBtn');
+      const mapsLink = document.getElementById('mapsLink');
+      const mapsLinkText = document.getElementById('mapsLinkText');
+      const iframe = document.getElementById('gmap');
+      const gen = document.getElementById('generatedDate');
+
+      plusCodeEl.textContent = plus;
+
+      // Create a Google Maps query URL that works with both browser and embed
+      const mapsQuery = encodeURIComponent(plus);
+      const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${mapsQuery}`;
+      // For embed, using the q parameter usually works
+      const embedUrl = `https://www.google.com/maps?q=${mapsQuery}&output=embed`;
+
+      mapsLink.href = mapsUrl;
+      mapsLinkText.href = mapsUrl;
+      iframe.src = embedUrl;
+
+      // Generated timestamp
+      gen.textContent = new Date().toLocaleString();
+
+      // Copy to clipboard with visual feedback
+      copyBtn.addEventListener('click', async function(){
+        try{
+          await navigator.clipboard.writeText(plus);
+          const success = document.createElement('span');
+          success.className = 'copy-success';
+          success.textContent = 'Copied!';
+          copyBtn.after(success);
+          setTimeout(()=>{ success.remove(); }, 1800);
+        }catch(e){
+          // fallback for older browsers
+          const ta = document.createElement('textarea');
+          ta.value = plus; document.body.appendChild(ta); ta.select();
+          try{ document.execCommand('copy'); alert('Copied to clipboard'); }catch(err){ prompt('Copy this text', plus); }
+          ta.remove();
+        }
+      });
+
+      // Share (uses Web Share API if available)
+      document.getElementById('shareBtn').addEventListener('click', async ()=>{
+        const payload = {title: 'Location — 5PQ7+GC2', text: plus, url: mapsUrl};
+        if(navigator.share){
+          try{ await navigator.share(payload); }
+          catch(err){ alert('Share canceled or failed'); }
+        }else{
+          // fallback: copy maps url
+          try{ await navigator.clipboard.writeText(mapsUrl); alert('Maps link copied to clipboard'); }
+          catch(e){ prompt('Copy this map link', mapsUrl); }
+        }
+      });
+
+      // Accessibility: allow copying by pressing Enter when plus code is focused
+      plusCodeEl.tabIndex = 0;
+      plusCodeEl.addEventListener('keydown', (ev)=>{ if(ev.key === 'Enter'){ copyBtn.click(); } });
+
+    })();
+  </script>
+</body>
+</html>
